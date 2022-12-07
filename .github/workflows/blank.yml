@@ -1,0 +1,25 @@
+
+name: BuildDocs
+
+on:
+  push:
+    branches: [ "*" ]
+  pull_request:
+    branches: [ "*" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' 
+  
+      - name: "Install Dependencies"
+        run: python3 -m pip install mkdocs mkdocs-material
+
+      - name: "Build Docs"
+        run: "mkdocs build -c -d ./public"
+        
