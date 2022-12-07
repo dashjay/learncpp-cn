@@ -1,5 +1,5 @@
 
-name: BuildDocs
+name: build-docs
 
 on:
   push:
@@ -22,4 +22,12 @@ jobs:
 
       - name: "Build Docs"
         run: "mkdocs build -c -d ./public"
+
+      - name: "make artifacts"
+        run: "tar -czvf /tmp/public.tgz ./public"
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: docs
+          path: /tmp/public.tgz
         
